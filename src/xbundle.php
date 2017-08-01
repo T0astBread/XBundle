@@ -6,21 +6,46 @@ class XBundleLoader extends Twig_Extension
 
     public function __construct(string $bundleLocation)
     {
+        $this->bundle = [];
         $this->bundleLocation = $bundleLocation;
     }
 
     public function loadBundle(string $bundleName)
     {
-        $this->bundle = [];
         $content = file_get_contents($this->bundleLocation.$bundleName);
-        foreach(preg_split("/\r\n/", $content) as $line)
+        $lines = preg_split("/\r\n/", $content);
+        for($i = 0; $i < count($lines); $i++)
         {
-            $id = strstr($line, "=", true);
-            $value = strstr($line, "=");
-            $value = substr($value, 1, strlen($value) - 1);
-            $this->bundle[$id] = $value;
+            $line = $lines[$i];
+            if(strpos($line, "=") !== false) $this->loadInlineValue($line);
+            else if(strlen($line) > 0) $i = $this->loadBlockValue($lines, $i);
         }
         return $this;
+    }
+
+    private function loadInlineValue(string $line)
+    {
+        $id = strstr($line, "=", true);
+        $value = strstr($line, "=");
+        $value = substr($value, 1, strlen($value) - 1);
+        $this->bundle[$id] = $value;
+    }
+
+    private function loadBlockValue($lines, int $pointer) //Pointer must point at line that contains the ID
+    {
+        $id = $lines[$pointer++];
+
+        $value = "";
+        $i = $pointer;
+        for(; $i < count($lines); $i++)
+        {
+            $line = $lines[$i];
+            if($line === "=") break;
+            // if($value !== "") $value .= "<br>";
+            $value .= $line;
+        }
+        $this->bundle[$id] = $value;
+        return $i;
     }
 
     public function getFilters()
