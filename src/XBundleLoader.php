@@ -1,5 +1,5 @@
 <?php
-namespace \XBundle\XBundleLoader;
+namespace XBundle;
 
 class XBundleLoader extends Twig_Extension
 {
