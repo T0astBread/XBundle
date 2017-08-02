@@ -16,6 +16,7 @@
             "role": "Developer"
         }
     ],
+    "minimum-stability": "alpha",
     "require":
     {
         "twig/twig": "^1.26"
