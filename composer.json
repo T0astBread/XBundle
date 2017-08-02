@@ -1,10 +1,30 @@
 {
+    "name": "t0astbread/xbundle",
+    "type": "library",
+    "description": "Simple resource bundle loader for the Twig template engine",
+    "keywords":
+    [
+        "resource", "bundle", "internationalization", "i18n", "twig", "template", "engine", "resources"
+    ],
+    "license": "MIT",
+    "authors":
+    [
+        {
+            "name": "T0astBread",
+            "email": "m.briedl1+packagist@gmail.com",
+            "homepage": "https://t0astbread.github.io",
+            "role": "Developer"
+        }
+    ],
     "require":
     {
         "twig/twig": "^1.26"
     },
     "autoload":
     {
-        "classmap": ["src/"]
+        "psr-0":
+        {
+            "XBundle": "src"
+        }
     }
 }
