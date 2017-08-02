@@ -1,4 +1,6 @@
 <?php
+namespace \XBundle\XBundleLoader;
+
 class XBundleLoader extends Twig_Extension
 {
     private $bundle;
