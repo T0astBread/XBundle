@@ -1,5 +1,7 @@
 <?php
-class XBundleLoader extends Twig_Extension
+namespace XBundle;
+
+class XBundleLoader extends \Twig_Extension
 {
     private $bundle;
     private $bundleLocation;
