@@ -1,7 +1,7 @@
 <?php
 namespace XBundle;
 
-class XBundleLoader extends \Twig_Extension
+class XBundle_Extension extends \Twig_Extension
 {
     private $bundle;
     private $bundleLocation;
@@ -52,7 +52,7 @@ class XBundleLoader extends \Twig_Extension
 
     public function getFilters()
     {
-        return [new Twig_SimpleFilter("bundle", [$this, "bundleFilter"])];
+        return [new \Twig_SimpleFilter("bundle", [$this, "bundleFilter"])];
     }
 
     public function bundleFilter(string $key)
